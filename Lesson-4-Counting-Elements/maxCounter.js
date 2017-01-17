@@ -107,3 +107,23 @@ function solution(n, a) {
   //return result
   return results;
 }
+
+
+function solutionEfficient(n, a) {
+  //create a results array consisting of all 0's
+  let results = new Array(n).fill(0);
+  let largest = 0;
+  let lastLargest = 0;
+  for(let i = 0; i < a.length; i++){
+    let resultsIndex = a[i] - 1;
+    if(a[i] > n){
+      lastLargest = largest;
+    }else{
+      results[resultsIndex] = Math.max(results[resultsIndex], lastLargest);
+      results[resultsIndex]++;
+      largest = Math.max(results[resultsIndex], largest);
+    }
+  }
+
+  return results.map(item => Math.max(item, lastLargest));
+}
